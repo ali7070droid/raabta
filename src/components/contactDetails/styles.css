@@ -1,0 +1,25 @@
+.contact-details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Two columns */
+    gap: 16px; /* Space between grid items */
+  }
+  
+  .contact-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-field label {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .contact-field span {
+    font-size: 14px;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-details-grid {
+      grid-template-columns: 1fr; /* Stack fields on smaller screens */
+    }
+  }

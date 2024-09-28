@@ -1,0 +1,82 @@
+/* General Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form fields */
+    max-width: 500px; /* Limit form width for better readability */
+    margin: 20px auto; /* Center the form */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for the form */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #333; /* Neutral text color */
+    margin-bottom: 20px;
+}
+
+/* Input fields styling */
+input[type="text"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Label Styling */
+label {
+    font-size: 1rem;
+    color: #555; /* Subtle label color */
+    font-weight: bold;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darken on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
