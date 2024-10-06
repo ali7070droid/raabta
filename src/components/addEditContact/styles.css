@@ -52,3 +52,26 @@ label {
 .contact-button:hover {
     background-color: #0056b3; /* Darken on hover */
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .add-edit-contact-form {
+        padding: 15px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .add-edit-contact-heading {
+        font-size: 1.5rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    .contact-button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
