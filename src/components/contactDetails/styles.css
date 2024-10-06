@@ -1,25 +1,109 @@
-.contact-details-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Two columns */
-    gap: 16px; /* Space between grid items */
+/* Container Styling */
+.contact-details-div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between sections */
+  max-width: 90%; 
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.contact-details-heading {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Button to Show/Hide Details */
+.contact-details-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.contact-details-button:hover {
+  background-color: #0056b3;
+}
+
+/* Contact Details Grid Layout */
+.contact-details-rows {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  /* justify-content: space-between; */
+}
+
+/* Individual Contact Field */
+
+
+/* Labels */
+.contact-details-label {
+  font-size: 1rem;
+  color: #555;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Span Styling */
+.contact-details-span {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  width: 100%; /* Ensures full width for span */
+  box-sizing: border-box;
+}
+
+/* Edit Button */
+.contact-details-grid button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #28a745; /* Different color for edit */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.contact-details-grid button:hover {
+  background-color: #218838;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-details-rows  {
+    grid-template-columns: repeat(1, 1fr); /* Stack fields vertically on smaller screens */
   }
-  
-  .contact-field {
-    display: flex;
-    flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  .contact-details-heading {
+      font-size: 1.5rem;
   }
-  
-  .contact-field label {
-    font-weight: bold;
-    margin-bottom: 4px;
+
+  .contact-details-label {
+      font-size: 0.9rem;
   }
-  
-  .contact-field span {
-    font-size: 14px;
+
+  .contact-details-button {
+      font-size: 0.9rem;
+      padding: 8px;
   }
-  
-  @media (max-width: 768px) {
-    .contact-details-grid {
-      grid-template-columns: 1fr; /* Stack fields on smaller screens */
-    }
-  }
+}

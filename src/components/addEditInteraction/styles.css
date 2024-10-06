@@ -1,5 +1,5 @@
 /* General Styling */
-form {
+.add-edit-interaction-form {
     display: flex;
     flex-direction: column;
     gap: 15px; /* Space between form fields */
@@ -12,14 +12,14 @@ form {
 }
 
 /* Heading */
-h2 {
+.add-edit-interaction-heading {
     text-align: center;
     color: #333; /* Neutral text color */
     margin-bottom: 20px;
 }
 
 /* Input fields styling */
-input[type="text"], input[type="date"], select, textarea {
+.interaction-input, .interaction-select, .interaction-textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -29,7 +29,7 @@ input[type="text"], input[type="date"], select, textarea {
     box-sizing: border-box;
 }
 
-textarea {
+.interaction-textarea {
     resize: vertical;
     min-height: 100px;
 }
@@ -42,7 +42,7 @@ label {
 }
 
 /* Button Styling */
-button {
+.interaction-button {
     padding: 10px 20px;
     background-color: #007bff; /* Primary color */
     color: white;
@@ -54,20 +54,20 @@ button {
     width: 100%;
 }
 
-button:hover {
+.interaction-button:hover {
     background-color: #0056b3; /* Darken on hover */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    form {
+    .add-edit-interaction-form {
         padding: 15px;
         width: 90%;
     }
 }
 
 @media (max-width: 480px) {
-    h2 {
+    .add-edit-interaction-heading {
         font-size: 1.5rem;
     }
 
@@ -75,7 +75,7 @@ button:hover {
         font-size: 0.9rem;
     }
 
-    button {
+    .interaction-button {
         font-size: 0.9rem;
         padding: 8px;
     }

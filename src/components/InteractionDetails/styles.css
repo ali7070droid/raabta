@@ -1,5 +1,5 @@
 /* General Styling for View */
-div {
+.interaction-details {
     display: flex;
     flex-direction: column;
     gap: 15px; /* Space between sections */
@@ -12,7 +12,7 @@ div {
 }
 
 /* Heading */
-h2 {
+.interaction-details-heading {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
@@ -25,7 +25,7 @@ label {
     font-weight: bold;
 }
 
-span {
+.interaction-details-span {
     display: inline-block;
     margin-top: 5px;
     font-size: 1rem;
@@ -40,7 +40,7 @@ span {
 }
 
 /* Button Styling */
-button {
+.interaction-details-button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -52,20 +52,20 @@ button {
     width: 100%;
 }
 
-button:hover {
+.interaction-details-button:hover {
     background-color: #0056b3;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    div {
+    .interaction-details {
         padding: 15px;
         width: 90%;
     }
 }
 
 @media (max-width: 480px) {
-    h2 {
+    .interaction-details-heading {
         font-size: 1.5rem;
     }
 
@@ -73,7 +73,7 @@ button:hover {
         font-size: 0.9rem;
     }
 
-    button {
+    .interaction-details-button {
         font-size: 0.9rem;
         padding: 8px;
     }

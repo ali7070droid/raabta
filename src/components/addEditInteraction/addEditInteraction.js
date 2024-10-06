@@ -47,12 +47,13 @@ const AddEditInteraction = ({ interaction}) => {
 
     return (
         <div>
-            <h2>{id ? 'Edit Interaction' : 'Add Interaction'}</h2>
+            <h2 className="add-edit-interaction-heading">{id ? 'Edit Interaction' : 'Add Interaction'}</h2>
 
-            <form onSubmit={handleSubmit}> 
+            <form onSubmit={handleSubmit} className="add-edit-interaction-form"> 
             <div>
                 <label>Name of Contact: </label>
                 <input
+                    className="interaction-input"
                     type = "text"
                     name = "nameOfContact"
                     value = {name}
@@ -64,6 +65,7 @@ const AddEditInteraction = ({ interaction}) => {
             <div>
                 <label>Date of Meeting : </label>
                 <input
+                    className="interaction-input"
                     type = "date"
                     name = "dateOfMeeting"
                     value = {formData?.dateOfMeeting}
@@ -74,6 +76,7 @@ const AddEditInteraction = ({ interaction}) => {
             <div>
                 <label>Type Of Interaction : </label>
                 <select 
+                className="interaction-select"
                 name = "typeOfInteraction" 
                 onChange={handleChange} 
                 defaultValue={formData?.typeOfInteraction}
@@ -91,13 +94,14 @@ const AddEditInteraction = ({ interaction}) => {
             <div>
                 <label>Comment : </label>
                 <textarea
+                    className="interaction-textarea"
                     name="comment"
                     value={formData?.comment}
                     onChange={handleChange}
                     required
                 />
             </div>
-            <button type="submit">{id ? 'Update' : 'Add'}</button>
+            <button className="interaction-button" type="submit">{id ? 'Update' : 'Add'}</button>
             </form>
 
             

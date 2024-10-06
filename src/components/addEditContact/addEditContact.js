@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import "./styles.css"
 const AddEditContact = ({contact}) => {
     const [formData, setFormData] = useState(contact);
     const {id} = useParams();
@@ -24,12 +24,13 @@ const AddEditContact = ({contact}) => {
 
     return (
         <div>
-            <h2>{id ? 'Edit Contact' : 'Add Contact'}</h2>
+            <h2 className="add-edit-contact-heading">{id ? 'Edit Contact' : 'Add Contact'}</h2>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="add-edit-contact-form">
             <div>
                 <label>Name: </label>
                 <input
+                    className="contact-input"
                     type = "text"
                     name = "name"
                     value = {formData?.name}
@@ -40,6 +41,7 @@ const AddEditContact = ({contact}) => {
             <div>
                 <label>Phone Number: </label>
                 <input
+                    className="contact-input"
                     type = "tel"
                     name = "phoneNumber"
                     value = {formData?.phoneNumber}
@@ -50,6 +52,7 @@ const AddEditContact = ({contact}) => {
             <div>
                 <label>Address: </label>
                 <textarea
+                    className="contact-textarea"
                     name="address"
                     value={formData?.address}
                     onChange={handleChange}
@@ -59,6 +62,7 @@ const AddEditContact = ({contact}) => {
             <div>
                 <label>Designation: </label>
                 <select
+                className="contact-select"
                 name="designation"
                 onChange={handleChange}
                 defaultValue={formData?.designation}
@@ -72,6 +76,7 @@ const AddEditContact = ({contact}) => {
             <div>
                 <label>Priority: </label>
                 <select
+                className="contact-select"
                 name="priority"
                 onChange={handleChange}
                 defaultValue={formData?.priority}
@@ -85,6 +90,7 @@ const AddEditContact = ({contact}) => {
             <div>
                 <label>Related To AIM: </label>
                 <input
+                className="contact-checkbox"
                     type="checkbox"
                     defaultChecked={formData?.relatedToAim}
                     onChange={handleChange}
@@ -96,6 +102,7 @@ const AddEditContact = ({contact}) => {
                 <div>
                     <label>Related To: </label>
                     <input
+                    className="contact-input"
                     type = "text"
                     name = "relatedTo"
                     value = {formData?.relatedTo}
@@ -108,6 +115,7 @@ const AddEditContact = ({contact}) => {
                 <div>
                     <label>Relation: </label>
                     <input
+                    className="contact-input"
                     type = "text"
                     name = "relation"
                     value = {formData?.relation}
@@ -119,6 +127,7 @@ const AddEditContact = ({contact}) => {
             <div>
                     <label>Contacted By: </label>
                     <input
+                    className="contact-input"
                     type = "text"
                     name = "contactedBy"
                     value = {formData?.contactedBy}
@@ -129,6 +138,7 @@ const AddEditContact = ({contact}) => {
                 <div>
                     <label>Contact Ownership: </label>
                     <select
+                    className="contact-select"
                         name="contactOwnership"
                         onChange={handleChange}
                         defaultValue={formData?.contactOwnership}
@@ -145,6 +155,7 @@ const AddEditContact = ({contact}) => {
                 <div>
                     <label>State: </label>
                     <select
+                    className="contact-select"
                         name="state"
                         onChange={handleChange}
                         defaultValue={formData?.state}
@@ -154,7 +165,7 @@ const AddEditContact = ({contact}) => {
                             <option value="inactive">Inactive</option>
                             
                     </select>
-                    <button type="submit">{id ? 'Update' :'Add'}</button>
+                    <button className="contact-button" type="submit">{id ? 'Update' :'Add'}</button>
                 </div>
 
 
