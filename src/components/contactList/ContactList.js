@@ -103,18 +103,25 @@ const ContactList = ({ contacts }) => {
 
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} >
       <div className="example-wrapper">
         <div className="example-header">
-          <span>Quick Filter:</span>
+          <div className="left-side">
+          <label className="contact-list-label">Quick Filter:</label>
           <input
+            className="contact-list-input"
             type="text"
             id="filter-text-box"
             placeholder="Filter..."
             onInput={onFilterTextBoxChanged}
           />
-          <button onClick={addContact}>Add new Contact</button>
-          <button onClick={addAddHocInteraction}>Add-hoc interaction</button>
+          </div>
+          <div className="right-side">
+          <button className = "contact-add-button first-page-button" onClick={addContact}>Add new Contact</button>
+          <button className="interaction-add-button first-page-button"  onClick={addAddHocInteraction}>Add-hoc interaction</button>
+          </div>
+          
+          
         </div>
 
         {/* <div>{JSON.stringify(contacts)}</div>
@@ -133,6 +140,7 @@ const ContactList = ({ contacts }) => {
           }
         >
           <AgGridReact
+          className="contactGrid"
             ref={gridRef}
             rowData={contacts}
             columnDefs={columnDefs}

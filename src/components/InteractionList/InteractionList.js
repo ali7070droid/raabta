@@ -81,7 +81,7 @@ const InteractionsList  = ({id}) => {
                 </Card>
         ))}
 
-        <button onClick={handleAddInteractionClick}>Add Interaction</button>
+        {/* <button onClick={handleAddInteractionClick}>Add Interaction</button> */}
             
         </div>
     );

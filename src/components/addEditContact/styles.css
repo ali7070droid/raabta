@@ -1,25 +1,22 @@
-/* General Styling */
-.add-edit-interaction-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between form fields */
-    max-width: 500px; /* Limit form width for better readability */
-    margin: 20px auto; /* Center the form */
-    padding: 20px;
-    background-color: #f9f9f9; /* Light background for the form */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-/* Heading */
-.add-edit-interaction-heading {
+.add-edit-contact-heading {
     text-align: center;
-    color: #333; /* Neutral text color */
+    color: #333;
     margin-bottom: 20px;
 }
 
-/* Input fields styling */
-.interaction-input, .interaction-select, .interaction-textarea {
+.add-edit-contact-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; /* Space between sections */
+    max-width: 90%; 
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-input, .contact-select, .contact-textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -29,20 +26,18 @@
     box-sizing: border-box;
 }
 
-.interaction-textarea {
+.contact-textarea {
     resize: vertical;
     min-height: 100px;
 }
 
-/* Label Styling */
 label {
     font-size: 1rem;
     color: #555; /* Subtle label color */
     font-weight: bold;
 }
 
-/* Button Styling */
-.interaction-button {
+.contact-button {
     padding: 10px 20px;
     background-color: #007bff; /* Primary color */
     color: white;
@@ -54,20 +49,20 @@ label {
     width: 100%;
 }
 
-.interaction-button:hover {
+.contact-button:hover {
     background-color: #0056b3; /* Darken on hover */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .add-edit-interaction-form {
+    .add-edit-contact-form {
         padding: 15px;
         width: 90%;
     }
 }
 
 @media (max-width: 480px) {
-    .add-edit-interaction-heading {
+    .add-edit-contact-heading {
         font-size: 1.5rem;
     }
 
@@ -75,7 +70,7 @@ label {
         font-size: 0.9rem;
     }
 
-    .interaction-button {
+    .contact-button {
         font-size: 0.9rem;
         padding: 8px;
     }

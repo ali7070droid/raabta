@@ -35,57 +35,57 @@ const ContactDetails = ({ contacts }) => {
     <div>
       {isEditing ? 
       (<AddEditContact contact={contact}/>) : (
-        <div>
-          <h2>Contact Details</h2>
-          <span><button onClick={handleShowDetails}>{showDetails ? 'Hide Details' : 'Show Details'}</button></span>
+        <div className='contact-details-div'>
+          <h2 className='contact-details-heading'>Contact Details</h2>
+          <span><button className='contact-details-button' onClick={handleShowDetails}>{showDetails ? 'Hide Details' : 'Show Details'}</button></span>
       {showDetails && (
-        <div className='contact-details-grid'>
+        <div className='contact-details-rows'>
       
         <div className='contact-field'>
-          <label>Name: </label>
-          <span>{contact.name}</span>
+          <label className='contact-details-label'>Name: </label>
+          <span className='contact-details-span'>{contact.name}</span>
         </div>
         <div className='contact-field'>
-          <label>Phone Number: </label>
-          <span>{contact.phoneNumber}</span>
+          <label className='contact-details-label'>Phone Number: </label>
+          <span className='contact-details-span'>{contact.phoneNumber}</span>
         </div>
         <div className='contact-field'>
-          <label>Address: </label>
-          <span>{contact.address}</span>
+          <label className='contact-details-label'>Address: </label>
+          <span className='contact-details-span'>{contact.address}</span>
         </div>
         <div className='contact-field'>
-          <label>Designation: </label>
-          <span>{contact.designation}</span>
+          <label className='contact-details-label'>Designation: </label>
+          <span className='contact-details-span'>{contact.designation}</span>
         </div>
         <div className='contact-field'>
-          <label>Priority: </label>
-          <span>{contact.priority}</span>
+          <label className='contact-details-label'>Priority: </label>
+          <span className='contact-details-span'>{contact.priority}</span>
         </div>
         {contact.relatedToAim === true && 
           <div className='contact-field'>
-            <label>Related To: </label>
-            <span>{contact.relatedToWho}</span>
+            <label className='contact-details-label'>Related To: </label>
+            <span className='contact-details-span'>{contact.relatedToWho}</span>
           </div>
         }
         {contact.relatedToAim === true && 
           <div className='contact-field'>
-            <label>Relation: </label>
-            <span>{contact.relation}</span>
+            <label className='contact-details-label'>Relation: </label>
+            <span className='contact-details-span'>{contact.relation}</span>
           </div>
         }
         <div className='contact-field'>
-          <label>Contacted By: </label>
-          <span>{contact.contactedBy}</span>
+          <label className='contact-details-label'>Contacted By: </label>
+          <span className='contact-details-span'>{contact.contactedBy}</span>
         </div>
         <div className='contact-field'>
-          <label>Contact Ownership: </label>
-          <span>{contact.contactOwnership}</span>
+          <label className='contact-details-label'>Contact Ownership: </label>
+          <span className='contact-details-span'>{contact.contactOwnership}</span>
         </div>
         <div className='contact-field'>
-          <label>State: </label>
-          <span>{contact.state}</span>
+          <label className='contact-details-label'>State: </label>
+          <span className='contact-details-span'>{contact.state}</span>
         </div>
-        <button onClick={handleEditClick}>Edit</button>
+        <button className='contact-details-button' onClick={handleEditClick}>Edit</button>
       </div>
       )}
       
@@ -94,7 +94,7 @@ const ContactDetails = ({ contacts }) => {
         </div>
       )
     }
-    <button onClick={() => handleAddInteractionClick(contact)}>Add Interaction</button>
+    <button className='contact-details-button' onClick={() => handleAddInteractionClick(contact)}>Add Interaction</button>
 
 
 

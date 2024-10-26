@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import AddEditInteraction from '../addEditInteraction/addEditInteraction';
-// import "./styles.css"
+import "./styles.css"
 const InteractionDetails = () => {
     const [interaction, setInteraction] = useState([])
     const { id } =useParams()
@@ -32,28 +32,29 @@ const InteractionDetails = () => {
             {isEditing ? 
                 (<AddEditInteraction interaction={interaction}/>) : (
                     <div>
-                    <h2>Interction Details</h2>
-
+                    <h2 className="interaction-details-heading">Interaction Details</h2>
+            <div className='interaction-details'>
             <div>
                 <label>Name of Contact: </label>
-                <span>{interaction.nameOfContact}</span>
+                <span className='interaction-details-span'>{interaction.nameOfContact}</span>
             </div>
 
             <div>
                 <label>Date of Meeting : </label>
-                <span>{interaction.dateOfMeeting}</span>
+                <span className='interaction-details-span'>{interaction.dateOfMeeting}</span>
             </div>
 
             <div>
                 <label>Type Of Interaction : </label>
-                <span>{interaction.typeOfInteraction}</span>
+                <span className='interaction-details-span'>{interaction.typeOfInteraction}</span>
             </div>
 
             <div>
                 <label>Comment : </label>
-                <span>{interaction.comment}</span>
+                <span className='interaction-details-span'>{interaction.comment}</span>
             </div>
-            <button onClick={handleEditClick}>Edit</button>
+            <button className="interaction-details-button" onClick={handleEditClick}>Edit</button>
+            </div>
             </div>
                 )
             }
