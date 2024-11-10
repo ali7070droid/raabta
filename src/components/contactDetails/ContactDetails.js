@@ -23,8 +23,9 @@ const ContactDetails = ({ contacts }) => {
     setShowDetails(!showDetails);
   }
 
-  const handleAddInteractionClick = (contact) => {
-    navigate("/add-interaction", {state: { contact}});
+  const handleAddInteractionClick = (contact, contactsFromState) => {
+    console.log(contacts)
+    navigate("/add-interaction", {state: { contact, contactsFromState}});
   }
 
   if (!contact) {
@@ -94,12 +95,12 @@ const ContactDetails = ({ contacts }) => {
         </div>
       )
     }
-    <button className='contact-details-button' onClick={() => handleAddInteractionClick(contact)}>Add Interaction</button>
+    <button className='contact-details-button' onClick={() => handleAddInteractionClick(contact, contacts)}>Add Interaction</button>
 
 
 
       
-    <InteractionList id={contact.id} />
+    <InteractionList id={contact.id} contacts={contacts} />
 
     
     </div>

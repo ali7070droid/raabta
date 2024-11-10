@@ -1,13 +1,22 @@
 import React, {useEffect, useState, useMemo} from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { Typeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import "./styles.css"
 
-const AddEditInteraction = ({ interaction}) => {
+const AddEditInteraction = ({ interaction, contacts }) => {
     const [formData, setFormData] = useState(interaction) //Use the proper object
     const  {id} = useParams();
     const location = useLocation();
-    const {contact} = location.state || {};
-    console.log(contact);
+    const {contact, contactsFromState} = location.state || {};
+    // const stateContact = location.state || {};
+    // const contact = stateContact.contact;
+    // const contactsState = stateContact.contacts
+    // console.log(stateContact)
+    // const {contactsState} = location.state || {};
+    console.log("Contact: " + contact);
+    console.log(contactsFromState);
     const nameValue = () => {
         if(contact !== undefined) {
             console.log(contact.name)
@@ -19,7 +28,24 @@ const AddEditInteraction = ({ interaction}) => {
         
     }
 
+    const optionsValue = () => {
+        if(contacts !== undefined) {
+            console.log(contacts);
+            return contacts.map(item => item.name);
+            // return contacts;
+        }
+        else {
+            console.log(contactsFromState);
+            return contactsFromState.map(item => item.name);
+            // return contactsFromState;
+        }
+    }
+
     const name = useMemo(() => nameValue(), []);
+    console.log("Name: " + name);
+
+    const options = useMemo(() => optionsValue(), []);
+    console.log("Options" + options);
 
     const navigate = useNavigate();
 
@@ -43,6 +69,10 @@ const AddEditInteraction = ({ interaction}) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
+    const handleChangeTypeAhead = (e) => {
+        console.log(e);
+    }
+
     
 
     return (
@@ -52,13 +82,22 @@ const AddEditInteraction = ({ interaction}) => {
             <form onSubmit={handleSubmit} className="add-edit-interaction-form"> 
             <div>
                 <label>Name of Contact: </label>
-                <input
+                {/* <input
                     className="interaction-input"
                     type = "text"
                     name = "nameOfContact"
                     value = {name}
                     onChange={handleChange}
                     required
+                /> */}
+                <Typeahead
+                    id = "contact-names"
+                    className="interaction-input"
+                    onChange={handleChangeTypeAhead}
+                    options={options}
+                    placeholder="Choose a contact..."
+                    selected={name === undefined ? [] : [name]}
+                    name = "nameOfContact"
                 />
             </div>
 

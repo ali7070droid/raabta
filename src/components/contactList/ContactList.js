@@ -97,8 +97,9 @@ const ContactList = ({ contacts }) => {
     navigate("/add-contact");
   }
 
-  const addAddHocInteraction = () => {
-    navigate("/add-interaction");
+  const addAddHocInteraction = (contactsFromState) => {
+    const temp = {};
+    navigate("/add-interaction", {state: {temp, contactsFromState}});
   }
 
 
@@ -118,7 +119,7 @@ const ContactList = ({ contacts }) => {
           </div>
           <div className="right-side">
           <button className = "contact-add-button first-page-button" onClick={addContact}>Add new Contact</button>
-          <button className="interaction-add-button first-page-button"  onClick={addAddHocInteraction}>Add-hoc interaction</button>
+          <button className="interaction-add-button first-page-button"  onClick={() => addAddHocInteraction(contacts)}>Add-hoc interaction</button>
           </div>
           
           

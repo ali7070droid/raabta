@@ -11,7 +11,7 @@ import axios from 'axios'; // Assuming you are using axios, you can also use fet
 import Card from 'react-bootstrap/Card';
 
 
-const InteractionsList  = ({id}) => {
+const InteractionsList  = ({id, contacts}) => {
     const [interactions, setInteractions] = useState([])
     const [loading, setLoading] = useState(true); // State for loading
     const [error, setError] = useState(null); // State for error handling
@@ -63,8 +63,8 @@ const InteractionsList  = ({id}) => {
         return <div>{error}</div>
     }
 
-    const interactionDetailsPage = (id) => {
-        navigate(`/interaction/${id}`)
+    const interactionDetailsPage = (id, contacts) => {
+        navigate(`/interaction/${id}`, {state:{contacts}})
         console.log(id)
     }
 
@@ -73,7 +73,7 @@ const InteractionsList  = ({id}) => {
         <div>
             {interactions.map(interaction => (
                 <Card  key={interaction.id}>
-                    <Card.Body onClick={() => interactionDetailsPage(interaction.id)}>
+                    <Card.Body onClick={() => interactionDetailsPage(interaction.id, contacts)}>
                         <Card.Title>{interaction.reasonForMeeting}</Card.Title>
                         <Card.Subtitle>{interaction.dateOfMeeting}</Card.Subtitle>
                         <Card.Text>{interaction.comment}</Card.Text>
