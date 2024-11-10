@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import AddEditInteraction from '../addEditInteraction/addEditInteraction';
 import "./styles.css"
@@ -7,6 +7,9 @@ const InteractionDetails = () => {
     const [interaction, setInteraction] = useState([])
     const { id } =useParams()
     const [isEditing, setIsEditing] = useState(false);
+    const location = useLocation();
+    const {contacts} = location.state || {};
+    console.log(contacts)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,7 +33,7 @@ const InteractionDetails = () => {
     return (
         <div>
             {isEditing ? 
-                (<AddEditInteraction interaction={interaction}/>) : (
+                (<AddEditInteraction interaction={interaction} contacts = {contacts}/>) : (
                     <div>
                     <h2 className="interaction-details-heading">Interaction Details</h2>
             <div className='interaction-details'>
