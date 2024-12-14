@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./styles.css"
-const AddEditContact = ({contact}) => {
+const AddEditContact = ({contact, setIsEditing}) => {
     const [formData, setFormData] = useState(contact);
+    console.log(contact)
     const {id} = useParams();
 
     const navigate = useNavigate();
@@ -10,15 +11,51 @@ const AddEditContact = ({contact}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(id) {
+            // formData.interactionDetails = null
+            const token = localStorage.getItem("token")
+            fetch(`http://localhost:5273/api/Contact/PutContactDetails?id=${id}`, {
+                headers : {
+                  Authorization: `Bearer ${token}`,
+                  'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method:'PUT',
+                body: JSON.stringify(formData)
+              }).then(response => console.log(response))
             console.log(formData);
+            setIsEditing(false)
+            navigate(`/contact/${id}`)
         }
         else {
+            if(formData.isAIM === "N") {
+                formData.relation = "";
+            }
+            const token = localStorage.getItem("token")
+            fetch(`http://localhost:5273/api/Contact/PostContactDetails`, {
+                headers : {
+                  Authorization: `Bearer ${token}`,
+                  'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method:'POST',
+                body: JSON.stringify(formData)
+              }).then(response => console.log(response))
             console.log(formData);
             //navigate somewhere
+            navigate('/contactList')
         }
     }
 
     const handleChange = (e) => {
+        // if(formData !== undefined) {
+        //     console.log(formData)
+        //     if(formData.isAIM === true) {
+        //         formData.isAIM = "Y"
+        //     } else {
+        //         formData.isAIM = "N"
+        //     }
+        // }
+        
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
@@ -43,8 +80,8 @@ const AddEditContact = ({contact}) => {
                 <input
                     className="contact-input"
                     type = "tel"
-                    name = "phoneNumber"
-                    value = {formData?.phoneNumber}
+                    name = "phone"
+                    value = {formData?.phone}
                     onChange={handleChange}
                     required
                 />
@@ -68,6 +105,7 @@ const AddEditContact = ({contact}) => {
                 defaultValue={formData?.designation}
                 required
                 >
+                    <option disabled selected value> --select an option --</option>
                     <option value="maulana">Maulana</option>
                     <option value="doctor">Doctor</option>
                     <option value="other">Other</option>
@@ -82,23 +120,38 @@ const AddEditContact = ({contact}) => {
                 defaultValue={formData?.priority}
                 required
                 >
+                    <option disabled selected value> --select an option --</option>
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
                 </select>
             </div>
-            <div>
+            {/* <div>
                 <label>Related To AIM: </label>
                 <input
                 className="contact-checkbox"
                     type="checkbox"
-                    defaultChecked={formData?.relatedToAim}
+                    defaultChecked={formData?.isAIM === "Y"}
                     onChange={handleChange}
-                    name="relatedToAim"
+                    name="isAIM"
                     required
                 />
+            </div> */}
+            <div>
+                <label>Related To AIM: </label>
+                <select
+                className="contact-select"
+                name="isAIM"
+                onChange={handleChange}
+                defaultValue={formData?.isAIM}
+                required
+                >
+                    <option disabled selected value> --select an option --</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
             </div>
-            {formData?.relatedToAim && (
+            {/* {formData?.relatedToAim && (
                 <div>
                     <label>Related To: </label>
                     <input
@@ -110,8 +163,8 @@ const AddEditContact = ({contact}) => {
                     required
                 />
                 </div>
-            ) }
-            {formData?.relatedToAim && (
+            ) } */}
+            {formData?.isAIM === "Y" && (
                 <div>
                     <label>Relation: </label>
                     <input
@@ -129,8 +182,8 @@ const AddEditContact = ({contact}) => {
                     <input
                     className="contact-input"
                     type = "text"
-                    name = "contactedBy"
-                    value = {formData?.contactedBy}
+                    name = "contactAddedBy"
+                    value = {formData?.contactAddedBy}
                     onChange={handleChange}
                     required
                 />
@@ -144,6 +197,7 @@ const AddEditContact = ({contact}) => {
                         defaultValue={formData?.contactOwnership}
                         required
                         >
+                            <option disabled selected value> --select an option --</option>
                             <option value="z1">Z1</option>
                             <option value="z2">Z2</option>
                             <option value="z3">Z3</option>
@@ -153,14 +207,15 @@ const AddEditContact = ({contact}) => {
                     </select>
                 </div>
                 <div>
-                    <label>State: </label>
+                    <label>Status: </label>
                     <select
                     className="contact-select"
-                        name="state"
+                        name="status"
                         onChange={handleChange}
-                        defaultValue={formData?.state}
+                        defaultValue={formData?.status}
                         required
                         >
+                            <option disabled selected value> --select an option --</option>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
                             

@@ -11,32 +11,28 @@ import axios from 'axios'; // Assuming you are using axios, you can also use fet
 import Card from 'react-bootstrap/Card';
 
 
-const InteractionsList  = ({id, contacts}) => {
+const InteractionsList  = ({contact}) => {
     const [interactions, setInteractions] = useState([])
     const [loading, setLoading] = useState(true); // State for loading
     const [error, setError] = useState(null); // State for error handling
-    // const { id } = useParams();
-    // const contact = contacts.find(contact => contact.id === id);
-    // useEffect(() => {
-    //     console.log(id)
-    //     fetch("http://localhost:8081/mockInteractions")
-    //     .then(response => response.json())
-    //     .then((data) => setInteractions(data))
-    //     console.log(interactions)
-    // }, []) //check this part
+
     const navigate = useNavigate();
 
     useEffect(() => {
         console.log("useEffect")
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8081/mockInteractions")
-                console.log(Array.isArray(response.data))
+                if(Object.keys(contact).length !== 0) {
+                    console.log("contact is not null", contact);
+                    const token = localStorage.getItem("token");
+                const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteractionDetailsByContactID?contactId=${contact.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setInteractions(response.data)
-                console.log(Array.isArray(interactions))
-                interactions.map(interaction => {
-                    console.log(interaction)
-                })
+                }
+                
             }
             catch(error) {
                 setError(error)
@@ -47,7 +43,7 @@ const InteractionsList  = ({id, contacts}) => {
         };
 
         fetchData();
-    }, [])
+    }, [contact])
 
     const handleAddInteractionClick = () => {
         navigate("/add-interaction");
@@ -63,8 +59,8 @@ const InteractionsList  = ({id, contacts}) => {
         return <div>{error}</div>
     }
 
-    const interactionDetailsPage = (id, contacts) => {
-        navigate(`/interaction/${id}`, {state:{contacts}})
+    const interactionDetailsPage = (id, contact) => {
+        navigate(`/interaction/${id}`, {state:{contact}})
         console.log(id)
     }
 
@@ -73,7 +69,7 @@ const InteractionsList  = ({id, contacts}) => {
         <div>
             {interactions.map(interaction => (
                 <Card  key={interaction.id}>
-                    <Card.Body onClick={() => interactionDetailsPage(interaction.id, contacts)}>
+                    <Card.Body onClick={() => interactionDetailsPage(interaction.id, contact)}>
                         <Card.Title>{interaction.reasonForMeeting}</Card.Title>
                         <Card.Subtitle>{interaction.dateOfMeeting}</Card.Subtitle>
                         <Card.Text>{interaction.comment}</Card.Text>

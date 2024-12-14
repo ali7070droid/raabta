@@ -14,29 +14,26 @@ import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the 
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import { ModuleRegistry } from "@ag-grid-community/core";
+import axios from "axios";
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 // import '../../../node_modules/ag-grid/dist/styles/ag-grid.css';
 
 
-const ContactList = ({ contacts }) => {
-  // console.log(contacts)
-  
-  //This was the old code by chat GPT.
-  // return (
-  //   <div>
-  //     <h2>Contact List</h2>
-  //     <ul>
-  //       {contacts.map(contact => (
-  //         <li key={contact.id}>
-  //           <Link to={`/contact/${contact.id}`}>{contact.name}</Link>
-  //         </li>
-  //       ))}
-  //     </ul>
-  //     <Link to="/add-contact">
-  //       <button>Add New Contact</button>
-  //     </Link>
-  //   </div>
-  // );
+const ContactList = () => {
+
+  const [contacts, setContacts] = useState([]);
+
+  //Try 1: Fetch in Use Effect and then set the Row data in onGrid Ready
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:5273/api/Contact/GetContactDetails", {
+      headers : {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(response => response.json())
+    .then((data) => setContacts(data))
+  }, [])
 
 
   //New code following ag-grid docs
@@ -48,16 +45,16 @@ const ContactList = ({ contacts }) => {
   const [columnDefs, setColumnDefs] = useState([
     {field: "id", minWidth: 20},
     {field: "name", minWidth: 100, filter: true},
-    {field: "phoneNumber", minWidth: 100, filter: true},
+    {field: "phone", minWidth: 100, filter: true},
     {field: "address", minWidth: 100, filter: true},
     {field: "designation", minWidth: 100, filter: true},
     {field: "priority", minWidth: 100, filter: true},
-    {field: "relatedToAim", minWidth: 100, filter: true},
-    {field: "relatedToWho", minWidth: 100, filter: true},
+    // {field: "isAim", minWidth: 100, filter: true},
+    // {field: "relatedToWho", minWidth: 100, filter: true},
     {field: "relation", minWidth: 100, filter: true},
-    {field: "contactedBy", minWidth: 100, filter: true},
+    {field: "contactAddedBy", minWidth: 100, filter: true},
     {field: "contactOwnership", minWidth: 100, filter: true},
-    {field: "state", minWidth: 100, filter: true},
+    {field: "status", minWidth: 100, filter: true},
   ]);
 
   
@@ -87,7 +84,7 @@ const ContactList = ({ contacts }) => {
     );
   }, []);
 
-  const myFunction = (event) => {
+  const onGridRowClick = (event) => {
     console.log(event)
     console.log(event.data)
     navigate("/contact/" + event.data.id)
@@ -147,7 +144,7 @@ const ContactList = ({ contacts }) => {
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
             autoSizeStrategy={{type: 'fitCellContents'}}
-            onRowClicked={(e) => myFunction(e)}
+            onRowClicked={(e) => onGridRowClick(e)}
             // onRowDoubleClicked={(e) => myFunction(e)}
             // rowSelection="single"
             // onRowSelected={(e) => myFunction(e)}
