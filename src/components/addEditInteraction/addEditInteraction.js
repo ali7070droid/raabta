@@ -5,11 +5,12 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import "./styles.css"
 
-const AddEditInteraction = ({ interaction, contacts }) => {
+const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
     const [formData, setFormData] = useState(interaction) //Use the proper object
     const  {id} = useParams();
     const location = useLocation();
     const {contact, contactsFromState} = location.state || {};
+    const [contactForId, setContactForId] = useState(contact);
     // const stateContact = location.state || {};
     // const contact = stateContact.contact;
     // const contactsState = stateContact.contacts
@@ -23,7 +24,7 @@ const AddEditInteraction = ({ interaction, contacts }) => {
             return contact.name;
         }
         else {
-            return formData?.nameOfContact
+            return formData?.name
         }
         
     }
@@ -41,7 +42,9 @@ const AddEditInteraction = ({ interaction, contacts }) => {
         }
     }
 
-    const name = useMemo(() => nameValue(), []);
+    // const name = useMemo(() => nameValue(), []);
+    // console.log("Name: " + name);
+    const [name,setName] = useState(() => nameValue());
     console.log("Name: " + name);
 
     const options = useMemo(() => optionsValue(), []);
@@ -55,13 +58,44 @@ const AddEditInteraction = ({ interaction, contacts }) => {
         e.preventDefault();
         if (id) {
             //call the edit api
+            formData.interactionDate = formData.interactionDate.split('T')[0];
+            
+            formData.contactDetailsID = contactForId.id
             console.log(formData)
+
+            const token = localStorage.getItem("token")
+            fetch(`http://localhost:5273/api/Interatction/PutInteratctionDetails?id=${formData.id}`, {
+                headers : {
+                  Authorization: `Bearer ${token}`,
+                  'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method:'PUT',
+                body: JSON.stringify(formData)
+              }).then(response => console.log(response))
             //navigate someplace
+            // toggleIsEditing(false);
+            setIsEditing(false);
+            navigate(`/interaction/${formData.id}`, {state:{contact}})
         }
         else {
+            formData.interactionDate = new Date().toISOString().split('T')[0];
             //call the add api
+            formData.contactDetailsID = contactForId.id
             console.log(formData)
+
+            const token = localStorage.getItem("token")
+            fetch(`http://localhost:5273/api/Interatction/PostInteratctionDetails`, {
+                headers : {
+                  Authorization: `Bearer ${token}`,
+                  'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                method:'POST',
+                body: JSON.stringify(formData)
+              }).then(response => console.log(response))
             //navigate someplace
+            navigate(`/contact/${contactForId.id}`)
         }
     }
 
@@ -70,6 +104,10 @@ const AddEditInteraction = ({ interaction, contacts }) => {
     }
 
     const handleChangeTypeAhead = (e) => {
+        const newContact = contactsFromState.find(c => c.name == e[0]);
+        setContactForId(newContact);
+        setName(e[0])
+        console.log(newContact)
         console.log(e);
     }
 
@@ -106,8 +144,8 @@ const AddEditInteraction = ({ interaction, contacts }) => {
                 <input
                     className="interaction-input"
                     type = "date"
-                    name = "dateOfMeeting"
-                    value = {formData?.dateOfMeeting}
+                    name = "meetingDate"
+                    value = {formData?.meetingDate}
                     onChange = {handleChange}
                     required
                 />
@@ -116,10 +154,11 @@ const AddEditInteraction = ({ interaction, contacts }) => {
                 <label>Type Of Interaction : </label>
                 <select 
                 className="interaction-select"
-                name = "typeOfInteraction" 
+                name = "reason" 
                 onChange={handleChange} 
-                defaultValue={formData?.typeOfInteraction}
+                defaultValue={formData?.reason}
                 required>
+                    <option disabled selected value> --select an option --</option>
                     <option value="call">Call</option>
                     <option value="inPerson">In Person</option>
                     <option value="ulemaDaawat">Ulema Daawat</option>
