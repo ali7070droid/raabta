@@ -31,7 +31,7 @@ const InteractionsList  = ({contact}) => {
                           localStorage.removeItem('token')
                           navigate("/")
                         }
-                const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteractionDetailsByContactID?contactId=${contact.id}`, {
+                const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteratctionDetailsByContactID?id=${contact.contactDetailsID}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

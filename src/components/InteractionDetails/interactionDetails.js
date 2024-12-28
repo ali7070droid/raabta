@@ -67,13 +67,13 @@ const InteractionDetails = () => {
     }
 
     const goBack = (e) => {
-        navigate(`/contact/${contact.id}`)
+        navigate(`/contact/${contact.contactDetailsID}`)
     }
 
     return (
         <div>
             {isEditing ? 
-                (<AddEditInteraction interaction={interaction} contacts = {allContacts} setIsEditing = {setIsEditing}/>) : (
+                (<AddEditInteraction interaction={interaction} contacts = {allContacts} setIsEditing = {setIsEditing} setInteraction={setInteraction}/>) : (
                     <div>
                     {/* <h2 className="interaction-details-heading">Interaction Details</h2> */}
             <div className='interaction-details'>

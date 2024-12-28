@@ -6,7 +6,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import "./styles.css"
 import { isTokenValid } from '../AuthenticationUtils/authUtils';
 
-const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
+const AddEditInteraction = ({ interaction, contacts, setIsEditing, setInteraction }) => {
     const [formData, setFormData] = useState(interaction) //Use the proper object
     const  {id} = useParams();
     const location = useLocation();
@@ -64,7 +64,7 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
             //call the edit api
             formData.interactionDate = formData.interactionDate.split('T')[0];
             
-            formData.contactDetailsID = contactForId.id
+            formData.contactDetailsID = contactForId.contactDetailsID
             console.log(formData)
 
             const token = localStorage.getItem("token")
@@ -84,12 +84,13 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
             //navigate someplace
             // toggleIsEditing(false);
             setIsEditing(false);
-            navigate(`/interaction/${formData.id}`, {state:{contact}})
+            setInteraction(formData);
+            navigate(`/interaction/${formData.contactDetailsID}`, {state:{contact}})
         }
         else {
             formData.interactionDate = new Date().toISOString().split('T')[0];
             //call the add api
-            formData.contactDetailsID = contactForId.id
+            formData.contactDetailsID = contactForId.contactDetailsID
             console.log(formData)
 
             const token = localStorage.getItem("token")
@@ -107,7 +108,7 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
                 body: JSON.stringify(formData)
               }).then(response => console.log(response))
             //navigate someplace
-            navigate(`/contact/${contactForId.id}`)
+            navigate(`/contact/${contactForId.contactDetailsID}`)
         }
     }
 

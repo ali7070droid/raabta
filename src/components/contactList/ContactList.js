@@ -49,7 +49,7 @@ const ContactList = () => {
   const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
   const [rowData, setRowData] = useState([]);
   const [columnDefs, setColumnDefs] = useState([
-    {field: "id", minWidth: 20},
+    {field: "contactDetailsID", minWidth: 20},
     {field: "name", minWidth: 100, filter: true},
     {field: "phone", minWidth: 100, filter: true},
     {field: "address", minWidth: 100, filter: true},
@@ -93,7 +93,7 @@ const ContactList = () => {
   const onGridRowClick = (event) => {
     console.log(event)
     console.log(event.data)
-    navigate("/contact/" + event.data.id)
+    navigate("/contact/" + event.data.contactDetailsID)
   }
 
   const addContact = () => {
