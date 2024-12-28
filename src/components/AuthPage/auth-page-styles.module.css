@@ -9,7 +9,7 @@
   }
   
   /* Heading */
-  h2 {
+  .auth-page-heading {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
@@ -23,13 +23,13 @@
     margin-bottom: 15px;
   }
   
-  label {
+  .auth-page-label {
     font-size: 1rem;
     color: #555;
     font-weight: bold;
   }
   
-  input {
+  .auth-page-input {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -38,7 +38,7 @@
   }
   
   /* Button Styling */
-  button {
+  .auth-page-button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -50,7 +50,7 @@
     width: 100%;
   }
   
-  button:hover {
+  .auth-page-button:hover {
     background-color: #0056b3;
   }
 
@@ -93,7 +93,7 @@
       padding: 15px;
     }
   
-    button {
+    .auth-page-button {
       font-size: 0.9rem;
       padding: 8px;
     }

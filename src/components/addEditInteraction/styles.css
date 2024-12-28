@@ -11,6 +11,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+.interaction-submit-buttons-div {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
 /* Heading */
 .add-edit-interaction-heading {
     text-align: center;

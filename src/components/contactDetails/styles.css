@@ -12,15 +12,20 @@
 }
 
 /* Heading */
-.contact-details-heading {
+/* .contact-details-heading {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
+} */
+
+.contact-details-heading {
+  margin: 0;
+  text-align: center;
 }
 
 /* Button to Show/Hide Details */
 .contact-details-button {
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   background-color: #007bff;
   color: white;
   border: none;
@@ -28,7 +33,45 @@
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
-  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.contact-details-heading-with-buttons {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.contact-details-back-button {
+  position: absolute;
+  left: 0px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.contact-details-toggle-button {
+  position: absolute;
+  right: 0px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .contact-details-button:hover {

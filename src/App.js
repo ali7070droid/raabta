@@ -11,11 +11,13 @@ import AddEditInteraction from './components/addEditInteraction/addEditInteracti
 import AddEditContact from './components/addEditContact/addEditContact';
 import AuthPage from './components/AuthPage/AuthPage';
 import ProtectedRoute from './components/AuthenticationUtils/ProtectedRoute';
+import Header from './components/Header/Header';
 function App() {
 
   return (
     <Router>
       {/* <NavBar/> */}
+      {/* <Header/> */}
       <Routes>
         <Route path="/" element={<AuthPage />} />
         <Route path="/contactList" element={<ProtectedRoute><ContactList /></ProtectedRoute>} />

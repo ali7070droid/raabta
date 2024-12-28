@@ -1,0 +1,27 @@
+.interaction-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1px; /* Space between sections */
+  max-width: 90%; 
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.interaction-container {
+    display: flex;
+    flex-direction: rows;
+    gap: 10px;
+    background-color: white;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+.interaction-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
