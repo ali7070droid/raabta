@@ -120,18 +120,14 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
             </div>
             <div>
                 <label>Designation: </label>
-                <select
-                className="contact-select"
-                name="designation"
-                onChange={handleChange}
-                defaultValue={formData?.designation}
-                required
-                >
-                    <option disabled selected value> --select an option --</option>
-                    <option value="maulana">Maulana</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="other">Other</option>
-                </select>
+                <input
+                    className="contact-input"
+                    type = "text"
+                    name = "designation"
+                    value = {formData?.designation}
+                    onChange={handleChange}
+                    required
+                />
             </div>
             <div>
                 <label>Priority: </label>
