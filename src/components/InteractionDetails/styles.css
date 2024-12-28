@@ -11,6 +11,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.interaction-heading-button {
+    display: flex;
+    flex-direction: row;
+    max-width: 500px;
+}
+
 /* Heading */
 .interaction-details-heading {
     text-align: center;
@@ -52,9 +58,41 @@ label {
     width: 100%;
 }
 
-.interaction-details-button:hover {
-    background-color: #0056b3;
+.interaction-back-button {
+    /* padding: 10px 20px; */
+    position:absolute;
+    left: 0px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
+
+.heading-interaction-details {
+    margin: 0;
+    text-align: center;
+}
+
+.interaction-details-button:hover {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.heading-back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

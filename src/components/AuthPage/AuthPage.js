@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "./auth-page-styles.css";
+import "./auth-page-styles.module.css";
 import { UserContext } from "../AuthenticationUtils/UserContext";
 import axios from "axios";
 
@@ -54,17 +54,17 @@ const AuthPage = () => {
       {isLogin ? (
         // Use the Login form code here
         <div className="form-container">
-  <h2>Login</h2>
+  <h2 className="auth-page-heading">Login</h2>
   <form onSubmit={handleLogin}>
     <div className="form-field">
-      <label>Email:</label>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+      <label className="auth-page-label">Email:</label>
+      <input className="auth-page-input"  type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
     </div>
     <div className="form-field">
-      <label>Password:</label>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
+      <label className="auth-page-label">Password:</label>
+      <input className="auth-page-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
     </div>
-    <button type="submit">Login</button>
+    <button className="auth-page-button" type="submit">Login</button>
     {error && <p>{error}</p>}
   </form>
 </div>
@@ -72,21 +72,21 @@ const AuthPage = () => {
       ) : (
         // Use the Registration form code here
         <div className="form-container">
-  <h2>Register</h2>
+  <h2 className="auth-page-heading">Register</h2>
   <form>
     <div className="form-field">
-      <label>Username:</label>
-      <input type="text" name="username" placeholder="Enter your username" required />
+      <label className="auth-page-label">Username:</label>
+      <input className="auth-page-input" type="text" name="username" placeholder="Enter your username" required />
     </div>
     <div className="form-field">
-      <label>Email:</label>
-      <input type="email" name="email" placeholder="Enter your email" required />
+      <label className="auth-page-label">Email:</label>
+      <input className="auth-page-input" type="email" name="email" placeholder="Enter your email" required />
     </div>
     <div className="form-field">
-      <label>Password:</label>
-      <input type="password" name="password" placeholder="Enter your password" required />
+      <label className="auth-page-label">Password:</label>
+      <input className="auth-page-input" type="password" name="password" placeholder="Enter your password" required />
     </div>
-    <button type="submit">Register</button>
+    <button className="auth-page-button" type="submit">Register</button>
   </form>
 </div>
 

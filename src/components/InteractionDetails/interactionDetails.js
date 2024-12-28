@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AddEditInteraction from '../addEditInteraction/addEditInteraction';
 import "./styles.css"
@@ -10,6 +10,7 @@ const InteractionDetails = () => {
     const location = useLocation();
     const {contact} = location.state || {};
     const [allContacts, setAllContacts] = useState([]);
+    const navigate = useNavigate()
     // console.log(contacts)
 
     // const toggleIsEditing = (value) => {
@@ -26,7 +27,7 @@ const InteractionDetails = () => {
                     }
                 })
                 setInteraction(response.data)
-                console.log(interaction)
+                console.log(response.data.meetingDate.split('T')[0])
             }
             catch(error) {
                 console.log(error)
@@ -50,10 +51,14 @@ const InteractionDetails = () => {
 
         fetchData();
         fetchAllContacts();
-    }, [])
+    }, [isEditing])
 
     const handleEditClick = () => {
         setIsEditing(true);
+    }
+
+    const goBack = (e) => {
+        navigate(`/contact/${contact.id}`)
     }
 
     return (
@@ -61,8 +66,12 @@ const InteractionDetails = () => {
             {isEditing ? 
                 (<AddEditInteraction interaction={interaction} contacts = {allContacts} setIsEditing = {setIsEditing}/>) : (
                     <div>
-                    <h2 className="interaction-details-heading">Interaction Details</h2>
+                    {/* <h2 className="interaction-details-heading">Interaction Details</h2> */}
             <div className='interaction-details'>
+            <div className='heading-back-button'>
+                <button onClick={goBack} className='interaction-back-button'>Back</button>
+                <h2 className='heading-interaction-details'>Interaction Details</h2>
+            </div>
             <div>
                 <label>Name of Contact: </label>
                 <span className='interaction-details-span'>{contact.name}</span>
@@ -70,7 +79,7 @@ const InteractionDetails = () => {
 
             <div>
                 <label>Date of Meeting : </label>
-                <span className='interaction-details-span'>{interaction.meetingDate}</span>
+                <span className='interaction-details-span'>{interaction.meetingDate?.split('T')[0]}</span>
             </div>
 
             <div>

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./styles.css"
-const AddEditContact = ({contact, setIsEditing}) => {
+const AddEditContact = ({contact, setIsEditing, setContact}) => {
     const [formData, setFormData] = useState(contact);
     console.log(contact)
     const {id} = useParams();
@@ -24,6 +24,7 @@ const AddEditContact = ({contact, setIsEditing}) => {
               }).then(response => console.log(response))
             console.log(formData);
             setIsEditing(false)
+            setContact(formData)
             navigate(`/contact/${id}`)
         }
         else {
@@ -59,11 +60,23 @@ const AddEditContact = ({contact, setIsEditing}) => {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
+    const handleCancel = (e) => {
+        if(id) {
+            setIsEditing(false)
+            navigate(`/contact/${id}`)
+        }
+        else  {
+            navigate(`/contactList`)
+        }
+    }
+
     return (
         <div>
             <h2 className="add-edit-contact-heading">{id ? 'Edit Contact' : 'Add Contact'}</h2>
 
-            <form onSubmit={handleSubmit} className="add-edit-contact-form">
+            <div>
+            <form onSubmit={handleSubmit} className="form-button-container">
+            <div className="add-edit-contact-form">
             <div>
                 <label>Name: </label>
                 <input
@@ -220,12 +233,30 @@ const AddEditContact = ({contact, setIsEditing}) => {
                             <option value="inactive">Inactive</option>
                             
                     </select>
-                    <button className="contact-button" type="submit">{id ? 'Update' :'Add'}</button>
+                    
                 </div>
+                
+                
+            
+            </div>
+
+            <div className="button-container">
+                    <button type="submit" className="contact-button">{id ? 'Update' :'Add'}</button>
+                    <button className="contact-button" onClick={handleCancel}>Cancel</button>
+            </div>
+
+            
+            
+                {/* <button className="contact-button" type="submit">{id ? 'Update' :'Add'}</button> */}
 
 
 
             </form>
+            
+            
+            </div>
+
+            
 
 
         </div>

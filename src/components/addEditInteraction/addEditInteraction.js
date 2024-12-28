@@ -37,6 +37,9 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
         }
         else {
             console.log(contactsFromState);
+            if(contactsFromState === null){
+                return []
+            }
             return contactsFromState.map(item => item.name);
             // return contactsFromState;
         }
@@ -111,6 +114,17 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
         console.log(e);
     }
 
+    const cancelUpdate = (e) => {
+        if(id) {
+            setIsEditing(false);
+            navigate(`/interaction/${formData.id}`, {state:{contact}})
+        }
+        else {
+            navigate('/contactList')
+        }
+        
+    }
+
     
 
     return (
@@ -145,7 +159,7 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
                     className="interaction-input"
                     type = "date"
                     name = "meetingDate"
-                    value = {formData?.meetingDate}
+                    value = {formData?.meetingDate.split('T')[0]}
                     onChange = {handleChange}
                     required
                 />
@@ -179,7 +193,11 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
                     required
                 />
             </div>
-            <button className="interaction-button" type="submit">{id ? 'Update' : 'Add'}</button>
+            <div className="interaction-submit-buttons-div">
+                <button className="interaction-button" type="submit">{id ? 'Update' : 'Add'}</button>
+                <button className="interaction-button" onClick={cancelUpdate}>Cancel</button>
+            </div>
+            
             </form>
 
             

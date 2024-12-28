@@ -6,10 +6,10 @@ import React, {
     StrictMode,
     useEffect,
   } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios'; // Assuming you are using axios, you can also use fetch
 import Card from 'react-bootstrap/Card';
-
+import './styles.css'
 
 const InteractionsList  = ({contact}) => {
     const [interactions, setInteractions] = useState([])
@@ -17,6 +17,7 @@ const InteractionsList  = ({contact}) => {
     const [error, setError] = useState(null); // State for error handling
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         console.log("useEffect")
@@ -43,7 +44,7 @@ const InteractionsList  = ({contact}) => {
         };
 
         fetchData();
-    }, [contact])
+    }, [contact, location.pathname])
 
     const handleAddInteractionClick = () => {
         navigate("/add-interaction");
@@ -67,17 +68,23 @@ const InteractionsList  = ({contact}) => {
 
     return (
         <div>
-            {interactions.map(interaction => (
-                <Card  key={interaction.id}>
-                    <Card.Body onClick={() => interactionDetailsPage(interaction.id, contact)}>
-                        <Card.Title>{interaction.reasonForMeeting}</Card.Title>
-                        <Card.Subtitle>{interaction.dateOfMeeting}</Card.Subtitle>
-                        <Card.Text>{interaction.comment}</Card.Text>
-                    </Card.Body>
-                </Card>
-        ))}
+        <div className="interaction-list-container">
+        {interactions.map(interaction => (
+                // <Card  key={interaction.id}>
+                //     <Card.Body onClick={() => interactionDetailsPage(interaction.id, contact)}>
+                //         <Card.Title>{interaction.reason}</Card.Title>
+                //         <Card.Subtitle>{interaction.meetingDate?.split('T')[0]}</Card.Subtitle>
+                //         <Card.Text>{interaction.comment}</Card.Text>
+                //     </Card.Body>
+                // </Card>
 
-        {/* <button onClick={handleAddInteractionClick}>Add Interaction</button> */}
+                <div onClick={() => interactionDetailsPage(interaction.id, contact)} key={interaction.id} className="interaction-container">
+                    <p>{interaction.meetingDate?.split('T')[0]}</p>
+                    <p>{interaction.comment}</p>
+                </div>
+        ))}
+        </div>
+            
             
         </div>
     );

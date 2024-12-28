@@ -6,8 +6,8 @@ import React, {
   StrictMode,
   useEffect,
 } from "react";
-import { useNavigate } from "react-router-dom";
-import "./styles.css";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./contact-list.css";
 import { Link } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
@@ -22,6 +22,7 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
 const ContactList = () => {
 
   const [contacts, setContacts] = useState([]);
+  const location = useLocation();
 
   //Try 1: Fetch in Use Effect and then set the Row data in onGrid Ready
   useEffect(() => {
@@ -33,7 +34,7 @@ const ContactList = () => {
     })
     .then(response => response.json())
     .then((data) => setContacts(data))
-  }, [])
+  }, [location.pathname])
 
 
   //New code following ag-grid docs
