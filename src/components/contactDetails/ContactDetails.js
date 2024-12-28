@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import "./styles.css"
 import InteractionList from "../../components/InteractionList/InteractionList";
 import AddEditContact from '../addEditContact/addEditContact';
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
 
 const ContactDetails = () => {
   const { id } = useParams(); // what is useParams
@@ -11,6 +12,10 @@ const ContactDetails = () => {
   const location = useLocation();
   useEffect(() => {
     const token = localStorage.getItem("token")
+    if(!isTokenValid(token)){
+          localStorage.removeItem('token')
+          navigate("/")
+        }
     fetch(`http://localhost:5273/api/Contact/GetContactDetailsById${id}`, {
       headers : {
         Authorization: `Bearer ${token}`

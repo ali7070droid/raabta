@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./styles.css"
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
 const AddEditContact = ({contact, setIsEditing, setContact}) => {
     const [formData, setFormData] = useState(contact);
     console.log(contact)
@@ -13,6 +14,10 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
         if(id) {
             // formData.interactionDetails = null
             const token = localStorage.getItem("token")
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+            }
             fetch(`http://localhost:5273/api/Contact/PutContactDetails?id=${id}`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
@@ -32,6 +37,10 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                 formData.relation = "";
             }
             const token = localStorage.getItem("token")
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+            }
             fetch(`http://localhost:5273/api/Contact/PostContactDetails`, {
                 headers : {
                   Authorization: `Bearer ${token}`,

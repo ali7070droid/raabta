@@ -10,6 +10,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios'; // Assuming you are using axios, you can also use fetch
 import Card from 'react-bootstrap/Card';
 import './styles.css'
+import { isTokenValid } from "../AuthenticationUtils/authUtils";
 
 const InteractionsList  = ({contact}) => {
     const [interactions, setInteractions] = useState([])
@@ -26,6 +27,10 @@ const InteractionsList  = ({contact}) => {
                 if(Object.keys(contact).length !== 0) {
                     console.log("contact is not null", contact);
                     const token = localStorage.getItem("token");
+                    if(!isTokenValid(token)){
+                          localStorage.removeItem('token')
+                          navigate("/")
+                        }
                 const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteractionDetailsByContactID?contactId=${contact.id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`

@@ -3,6 +3,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AddEditInteraction from '../addEditInteraction/addEditInteraction';
 import "./styles.css"
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
 const InteractionDetails = () => {
     const [interaction, setInteraction] = useState([])
     const { id } =useParams()
@@ -21,6 +22,10 @@ const InteractionDetails = () => {
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem("token")
+                if(!isTokenValid(token)){
+                      localStorage.removeItem('token')
+                      navigate("/")
+                    }
                 const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteratctionDetailsByID?id=${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -37,6 +42,10 @@ const InteractionDetails = () => {
         const fetchAllContacts = async () => {
             try {
                 const token = localStorage.getItem("token")
+                if(!isTokenValid(token)){
+                      localStorage.removeItem('token')
+                      navigate("/")
+                    }
                 const response = await axios.get(`http://localhost:5273/api/Contact/GetContactDetails`, {
                     headers: {
                         Authorization: `Bearer ${token}`

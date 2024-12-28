@@ -4,6 +4,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import "./styles.css"
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
 
 const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
     const [formData, setFormData] = useState(interaction) //Use the proper object
@@ -67,6 +68,10 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
             console.log(formData)
 
             const token = localStorage.getItem("token")
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+                }
             fetch(`http://localhost:5273/api/Interatction/PutInteratctionDetails?id=${formData.id}`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
@@ -88,6 +93,10 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
             console.log(formData)
 
             const token = localStorage.getItem("token")
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+                }
             fetch(`http://localhost:5273/api/Interatction/PostInteratctionDetails`, {
                 headers : {
                   Authorization: `Bearer ${token}`,

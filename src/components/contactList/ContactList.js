@@ -15,6 +15,7 @@ import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import { ModuleRegistry } from "@ag-grid-community/core";
 import axios from "axios";
+import { isTokenValid } from "../AuthenticationUtils/authUtils";
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 // import '../../../node_modules/ag-grid/dist/styles/ag-grid.css';
 
@@ -27,6 +28,10 @@ const ContactList = () => {
   //Try 1: Fetch in Use Effect and then set the Row data in onGrid Ready
   useEffect(() => {
     const token = localStorage.getItem("token");
+    if(!isTokenValid(token)){
+      localStorage.removeItem('token')
+      navigate("/")
+    }
     fetch("http://localhost:5273/api/Contact/GetContactDetails", {
       headers : {
         Authorization: `Bearer ${token}`
