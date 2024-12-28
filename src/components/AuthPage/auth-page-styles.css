@@ -39,7 +39,7 @@
   
   /* Button Styling */
   .auth-page-button {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     background-color: #007bff;
     color: white;
     border: none;
@@ -47,7 +47,7 @@
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    width: 100%;
+    /* width: 100%; */
   }
   
   .auth-page-button:hover {
@@ -64,7 +64,7 @@
   
   /* Toggle Buttons */
   .toggle-container button {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     background-color: #f0f0f0;
     color: #333;
     border: 1px solid #ccc;

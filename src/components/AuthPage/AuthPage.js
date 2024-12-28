@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "./auth-page-styles.module.css";
+import "./auth-page-styles.css";
 import { UserContext } from "../AuthenticationUtils/UserContext";
 import axios from "axios";
 
@@ -9,11 +9,14 @@ const AuthPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUserName] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const {setUser} = useContext(UserContext);
+  const [registrationMessage, setregistrationMessage] = useState('');
 
   const toggleAuthPage = () => {
+    setregistrationMessage('')
     setIsLogin(!isLogin);
   };
 
@@ -32,6 +35,23 @@ const AuthPage = () => {
       setError('Invalid credentials');
     }
   };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("Registering the user");
+      console.log(username, email. password);
+      const response = await axios.post('http://localhost:5273/api/Authentication/Register?role=Admin', {
+        username,email,password
+      });
+      setregistrationMessage('A link has been sent to the entered email id. Please open the email and click on the link to verify your registration. And login after that.')
+      setUserName('');
+      setEmail('');
+      setPassword('');
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div>
@@ -73,20 +93,21 @@ const AuthPage = () => {
         // Use the Registration form code here
         <div className="form-container">
   <h2 className="auth-page-heading">Register</h2>
-  <form>
+  <form onSubmit={handleRegister}>
     <div className="form-field">
       <label className="auth-page-label">Username:</label>
-      <input className="auth-page-input" type="text" name="username" placeholder="Enter your username" required />
+      <input className="auth-page-input" type="text" value={username} onChange={(e) => setUserName(e.target.value)}  placeholder="Enter your username" required />
     </div>
     <div className="form-field">
       <label className="auth-page-label">Email:</label>
-      <input className="auth-page-input" type="email" name="email" placeholder="Enter your email" required />
+      <input className="auth-page-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)}  placeholder="Enter your email" required />
     </div>
     <div className="form-field">
       <label className="auth-page-label">Password:</label>
-      <input className="auth-page-input" type="password" name="password" placeholder="Enter your password" required />
+      <input className="auth-page-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)}  placeholder="Enter your password" required />
     </div>
     <button className="auth-page-button" type="submit">Register</button>
+    {registrationMessage && <p>{registrationMessage}</p>}
   </form>
 </div>
 
