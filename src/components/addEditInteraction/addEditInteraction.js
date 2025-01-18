@@ -183,12 +183,12 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing, setInteractio
                 defaultValue={formData?.reason}
                 required>
                     <option disabled selected value> --select an option --</option>
-                    <option value="call">Call</option>
-                    <option value="inPerson">In Person</option>
-                    <option value="ulemaDaawat">Ulema Daawat</option>
-                    <option value="invitedAsSpeaker">Invited As Speaker</option>
-                    <option value="correspondence">Correspondence</option>
-                    <option value="others">Others</option>
+                    <option value="Call">Call</option>
+                    <option value="In Person">In Person</option>
+                    <option value="Ulema Daawat">Ulema Daawat</option>
+                    <option value="Invited As Speaker">Invited As Speaker</option>
+                    <option value="Correspondence">Correspondence</option>
+                    <option value="Others">Others</option>
                 </select>
 
             </div>

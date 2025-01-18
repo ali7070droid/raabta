@@ -139,9 +139,9 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                 required
                 >
                     <option disabled selected value> --select an option --</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                 </select>
             </div>
             {/* <div>
@@ -216,12 +216,13 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                         required
                         >
                             <option disabled selected value> --select an option --</option>
-                            <option value="z1">Z1</option>
-                            <option value="z2">Z2</option>
-                            <option value="z3">Z3</option>
-                            <option value="z4">Z4</option>
-                            <option value="obc">OBC</option>
-                            <option value="tac">TAC</option>
+                            <option value="Z1">Z1</option>
+                            <option value="Z2">Z2</option>
+                            <option value="Z3">Z3</option>
+                            <option value="Z4">Z4</option>
+                            <option value="OBC">OBC</option>
+                            <option value="TAC">TAC</option>
+                            <option value="OIC">OIC</option>
                     </select>
                 </div>
                 <div>
@@ -234,8 +235,8 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                         required
                         >
                             <option disabled selected value> --select an option --</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                             
                     </select>
                     

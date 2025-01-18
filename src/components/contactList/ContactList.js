@@ -121,8 +121,8 @@ const ContactList = () => {
           />
           </div>
           <div className="right-side">
-          <button className = "contact-add-button first-page-button" onClick={addContact}>Add new Contact</button>
-          <button className="interaction-add-button first-page-button"  onClick={() => addAddHocInteraction(contacts)}>Add-hoc interaction</button>
+          <button className = "contact-add-button first-page-button" onClick={addContact}>Add Contact</button>
+          <button className="interaction-add-button first-page-button"  onClick={() => addAddHocInteraction(contacts)}>Add Interaction</button>
           </div>
           
           

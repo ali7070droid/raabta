@@ -23,7 +23,7 @@ const ContactDetails = () => {
     })
     .then(response => response.json())
     .then(data => setContact(data))
-  }, [location.pathname, isEditing])
+  }, [location.pathname, isEditing, contact])
 
   const navigate = useNavigate();
   // const contact = contacts.find(contact => contact.id === id);
