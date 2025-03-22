@@ -4,6 +4,7 @@ import "./styles.css"
 import InteractionList from "../../components/InteractionList/InteractionList";
 import AddEditContact from '../addEditContact/addEditContact';
 import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 
 const ContactDetails = () => {
   const { id } = useParams(); // what is useParams
@@ -16,7 +17,7 @@ const ContactDetails = () => {
           localStorage.removeItem('token')
           navigate("/")
         }
-    fetch(`http://localhost:5273/api/Contact/GetContactDetailsById${id}`, {
+    fetch(`${RAABTA_API}/api/Contact/GetContactDetailsById${id}`, {
       headers : {
         Authorization: `Bearer ${token}`
       }

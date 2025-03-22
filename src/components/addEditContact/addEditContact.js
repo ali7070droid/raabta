@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./styles.css"
 import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 const AddEditContact = ({contact, setIsEditing, setContact}) => {
     const [formData, setFormData] = useState(contact);
     console.log(contact)
@@ -18,7 +19,7 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                   localStorage.removeItem('token')
                   navigate("/")
             }
-            fetch(`http://localhost:5273/api/Contact/PutContactDetails?id=${id}`, {
+            fetch(`${RAABTA_API}/api/Contact/PutContactDetails?id=${id}`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',
@@ -41,7 +42,7 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                   localStorage.removeItem('token')
                   navigate("/")
             }
-            fetch(`http://localhost:5273/api/Contact/PostContactDetails`, {
+            fetch(`${RAABTA_API}/api/Contact/PostContactDetails`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',

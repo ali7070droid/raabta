@@ -16,6 +16,7 @@ import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-mod
 import { ModuleRegistry } from "@ag-grid-community/core";
 import axios from "axios";
 import { isTokenValid } from "../AuthenticationUtils/authUtils";
+import { RAABTA_API } from "../../Constants";
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 // import '../../../node_modules/ag-grid/dist/styles/ag-grid.css';
 
@@ -32,7 +33,7 @@ const ContactList = () => {
       localStorage.removeItem('token')
       navigate("/")
     }
-    fetch("http://localhost:5273/api/Contact/GetContactDetails", {
+    fetch(`${RAABTA_API}/api/Contact/GetContactDetails`, {
       headers : {
         Authorization: `Bearer ${token}`
       }

@@ -5,6 +5,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import "./styles.css"
 import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 
 const AddEditInteraction = ({ interaction, contacts, setIsEditing, setInteraction }) => {
     const [formData, setFormData] = useState(interaction) //Use the proper object
@@ -72,7 +73,7 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing, setInteractio
                   localStorage.removeItem('token')
                   navigate("/")
                 }
-            fetch(`http://localhost:5273/api/Interatction/PutInteratctionDetails?id=${formData.id}`, {
+            fetch(`${RAABTA_API}/api/Interatction/PutInteratctionDetails?id=${formData.id}`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',
@@ -98,7 +99,7 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing, setInteractio
                   localStorage.removeItem('token')
                   navigate("/")
                 }
-            fetch(`http://localhost:5273/api/Interatction/PostInteratctionDetails`, {
+            fetch(`${RAABTA_API}/api/Interatction/PostInteratctionDetails`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',

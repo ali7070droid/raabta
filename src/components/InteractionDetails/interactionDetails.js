@@ -4,6 +4,7 @@ import axios from 'axios';
 import AddEditInteraction from '../addEditInteraction/addEditInteraction';
 import "./styles.css"
 import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 const InteractionDetails = () => {
     const [interaction, setInteraction] = useState([])
     const { id } =useParams()
@@ -26,7 +27,7 @@ const InteractionDetails = () => {
                       localStorage.removeItem('token')
                       navigate("/")
                     }
-                const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteratctionDetailsByID?id=${id}`, {
+                const response = await axios.get(`${RAABTA_API}/api/Interatction/GetInteratctionDetailsByID?id=${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -46,7 +47,7 @@ const InteractionDetails = () => {
                       localStorage.removeItem('token')
                       navigate("/")
                     }
-                const response = await axios.get(`http://localhost:5273/api/Contact/GetContactDetails`, {
+                const response = await axios.get(`${RAABTA_API}/api/Contact/GetContactDetails`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

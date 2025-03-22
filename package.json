@@ -2,6 +2,7 @@
   "name": "raabta",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/raabta",
   "dependencies": {
     "@ag-grid-community/client-side-row-model": "^32.1.0",
     "@ag-grid-community/core": "^32.1.0",

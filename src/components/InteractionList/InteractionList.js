@@ -11,6 +11,7 @@ import axios from 'axios'; // Assuming you are using axios, you can also use fet
 import Card from 'react-bootstrap/Card';
 import './styles.css'
 import { isTokenValid } from "../AuthenticationUtils/authUtils";
+import { RAABTA_API } from "../../Constants";
 
 const InteractionsList  = ({contact}) => {
     const [interactions, setInteractions] = useState([])
@@ -31,7 +32,7 @@ const InteractionsList  = ({contact}) => {
                           localStorage.removeItem('token')
                           navigate("/")
                         }
-                const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteratctionDetailsByContactID?id=${contact.contactDetailsID}`, {
+                const response = await axios.get(`${RAABTA_API}/api/Interatction/GetInteratctionDetailsByContactID?id=${contact.contactDetailsID}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
