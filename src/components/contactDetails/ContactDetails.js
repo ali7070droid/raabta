@@ -30,7 +30,7 @@ const ContactDetails = () => {
   // const contact = contacts.find(contact => contact.id === id);
   
   const [showDetails, setShowDetails] = useState(false);
-  console.log(contact)
+  // console.log(contact)
 
   const handleEditClick = () => {
     setIsEditing(true);

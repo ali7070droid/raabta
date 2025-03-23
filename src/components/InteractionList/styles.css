@@ -19,9 +19,22 @@
     padding: 5px;
     border-radius: 10px;
     vertical-align: middle;
+    position: relative;
 }
 
 .interaction-container:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+}
+
+.delete-button {
+    position: absolute;
+    background-color: red;
+    right: 10px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
