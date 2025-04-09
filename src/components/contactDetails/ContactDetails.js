@@ -3,6 +3,8 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import "./styles.css"
 import InteractionList from "../../components/InteractionList/InteractionList";
 import AddEditContact from '../addEditContact/addEditContact';
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 
 const ContactDetails = () => {
   const { id } = useParams(); // what is useParams
@@ -11,20 +13,24 @@ const ContactDetails = () => {
   const location = useLocation();
   useEffect(() => {
     const token = localStorage.getItem("token")
-    fetch(`http://localhost:5273/api/Contact/GetContactDetailsById${id}`, {
+    if(!isTokenValid(token)){
+          localStorage.removeItem('token')
+          navigate("/")
+        }
+    fetch(`${RAABTA_API}/api/Contact/GetContactDetailsById${id}`, {
       headers : {
         Authorization: `Bearer ${token}`
       }
     })
     .then(response => response.json())
     .then(data => setContact(data))
-  }, [location.pathname, isEditing])
+  }, [location.pathname, isEditing, contact])
 
   const navigate = useNavigate();
   // const contact = contacts.find(contact => contact.id === id);
   
   const [showDetails, setShowDetails] = useState(false);
-  console.log(contact)
+  // console.log(contact)
 
   const handleEditClick = () => {
     setIsEditing(true);

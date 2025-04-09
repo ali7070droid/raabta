@@ -49,7 +49,7 @@ label {
 
 /* Button Styling */
 .interaction-button {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     background-color: #007bff; /* Primary color */
     color: white;
     border: none;
@@ -57,7 +57,7 @@ label {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .interaction-button:hover {

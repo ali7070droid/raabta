@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./styles.css"
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 const AddEditContact = ({contact, setIsEditing, setContact}) => {
     const [formData, setFormData] = useState(contact);
     console.log(contact)
@@ -13,7 +15,11 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
         if(id) {
             // formData.interactionDetails = null
             const token = localStorage.getItem("token")
-            fetch(`http://localhost:5273/api/Contact/PutContactDetails?id=${id}`, {
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+            }
+            fetch(`${RAABTA_API}/api/Contact/PutContactDetails?id=${id}`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',
@@ -32,7 +38,11 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                 formData.relation = "";
             }
             const token = localStorage.getItem("token")
-            fetch(`http://localhost:5273/api/Contact/PostContactDetails`, {
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+            }
+            fetch(`${RAABTA_API}/api/Contact/PostContactDetails`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',
@@ -111,18 +121,14 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
             </div>
             <div>
                 <label>Designation: </label>
-                <select
-                className="contact-select"
-                name="designation"
-                onChange={handleChange}
-                defaultValue={formData?.designation}
-                required
-                >
-                    <option disabled selected value> --select an option --</option>
-                    <option value="maulana">Maulana</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="other">Other</option>
-                </select>
+                <input
+                    className="contact-input"
+                    type = "text"
+                    name = "designation"
+                    value = {formData?.designation}
+                    onChange={handleChange}
+                    required
+                />
             </div>
             <div>
                 <label>Priority: </label>
@@ -134,9 +140,9 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                 required
                 >
                     <option disabled selected value> --select an option --</option>
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                 </select>
             </div>
             {/* <div>
@@ -211,12 +217,13 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                         required
                         >
                             <option disabled selected value> --select an option --</option>
-                            <option value="z1">Z1</option>
-                            <option value="z2">Z2</option>
-                            <option value="z3">Z3</option>
-                            <option value="z4">Z4</option>
-                            <option value="obc">OBC</option>
-                            <option value="tac">TAC</option>
+                            <option value="Z1">Z1</option>
+                            <option value="Z2">Z2</option>
+                            <option value="Z3">Z3</option>
+                            <option value="Z4">Z4</option>
+                            <option value="OBC">OBC</option>
+                            <option value="TAC">TAC</option>
+                            <option value="OIC">OIC</option>
                     </select>
                 </div>
                 <div>
@@ -229,8 +236,8 @@ const AddEditContact = ({contact, setIsEditing, setContact}) => {
                         required
                         >
                             <option disabled selected value> --select an option --</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                             
                     </select>
                     

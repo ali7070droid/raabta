@@ -4,8 +4,10 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import "./styles.css"
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 
-const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
+const AddEditInteraction = ({ interaction, contacts, setIsEditing, setInteraction }) => {
     const [formData, setFormData] = useState(interaction) //Use the proper object
     const  {id} = useParams();
     const location = useLocation();
@@ -63,11 +65,15 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
             //call the edit api
             formData.interactionDate = formData.interactionDate.split('T')[0];
             
-            formData.contactDetailsID = contactForId.id
+            formData.contactDetailsID = contactForId.contactDetailsID
             console.log(formData)
 
             const token = localStorage.getItem("token")
-            fetch(`http://localhost:5273/api/Interatction/PutInteratctionDetails?id=${formData.id}`, {
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+                }
+            fetch(`${RAABTA_API}/api/Interatction/PutInteratctionDetails?id=${formData.id}`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',
@@ -79,16 +85,21 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
             //navigate someplace
             // toggleIsEditing(false);
             setIsEditing(false);
-            navigate(`/interaction/${formData.id}`, {state:{contact}})
+            setInteraction(formData);
+            navigate(`/interaction/${formData.contactDetailsID}`, {state:{contact}})
         }
         else {
             formData.interactionDate = new Date().toISOString().split('T')[0];
             //call the add api
-            formData.contactDetailsID = contactForId.id
+            formData.contactDetailsID = contactForId.contactDetailsID
             console.log(formData)
 
             const token = localStorage.getItem("token")
-            fetch(`http://localhost:5273/api/Interatction/PostInteratctionDetails`, {
+            if(!isTokenValid(token)){
+                  localStorage.removeItem('token')
+                  navigate("/")
+                }
+            fetch(`${RAABTA_API}/api/Interatction/PostInteratctionDetails`, {
                 headers : {
                   Authorization: `Bearer ${token}`,
                   'Accept': 'application/json',
@@ -98,7 +109,7 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
                 body: JSON.stringify(formData)
               }).then(response => console.log(response))
             //navigate someplace
-            navigate(`/contact/${contactForId.id}`)
+            navigate(`/contact/${contactForId.contactDetailsID}`)
         }
     }
 
@@ -173,12 +184,12 @@ const AddEditInteraction = ({ interaction, contacts, setIsEditing }) => {
                 defaultValue={formData?.reason}
                 required>
                     <option disabled selected value> --select an option --</option>
-                    <option value="call">Call</option>
-                    <option value="inPerson">In Person</option>
-                    <option value="ulemaDaawat">Ulema Daawat</option>
-                    <option value="invitedAsSpeaker">Invited As Speaker</option>
-                    <option value="correspondence">Correspondence</option>
-                    <option value="others">Others</option>
+                    <option value="Call">Call</option>
+                    <option value="In Person">In Person</option>
+                    <option value="Ulema Daawat">Ulema Daawat</option>
+                    <option value="Invited As Speaker">Invited As Speaker</option>
+                    <option value="Correspondence">Correspondence</option>
+                    <option value="Others">Others</option>
                 </select>
 
             </div>

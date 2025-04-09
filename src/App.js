@@ -15,9 +15,7 @@ import Header from './components/Header/Header';
 function App() {
 
   return (
-    <Router>
-      {/* <NavBar/> */}
-      {/* <Header/> */}
+
       <Routes>
         <Route path="/" element={<AuthPage />} />
         <Route path="/contactList" element={<ProtectedRoute><ContactList /></ProtectedRoute>} />
@@ -27,7 +25,6 @@ function App() {
         
         <Route path="/add-interaction" element={<AddEditInteraction/>} />
       </Routes>
-    </Router>
   );
 }
 

@@ -47,7 +47,7 @@ label {
 
 /* Button Styling */
 .interaction-details-button {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     background-color: #007bff;
     color: white;
     border: none;
@@ -55,7 +55,7 @@ label {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .interaction-back-button {

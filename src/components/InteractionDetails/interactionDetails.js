@@ -3,6 +3,8 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AddEditInteraction from '../addEditInteraction/addEditInteraction';
 import "./styles.css"
+import { isTokenValid } from '../AuthenticationUtils/authUtils';
+import { RAABTA_API } from "../../Constants";
 const InteractionDetails = () => {
     const [interaction, setInteraction] = useState([])
     const { id } =useParams()
@@ -21,7 +23,11 @@ const InteractionDetails = () => {
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem("token")
-                const response = await axios.get(`http://localhost:5273/api/Interatction/GetInteratctionDetailsByID?id=${id}`, {
+                if(!isTokenValid(token)){
+                      localStorage.removeItem('token')
+                      navigate("/")
+                    }
+                const response = await axios.get(`${RAABTA_API}/api/Interatction/GetInteratctionDetailsByID?id=${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -37,7 +43,11 @@ const InteractionDetails = () => {
         const fetchAllContacts = async () => {
             try {
                 const token = localStorage.getItem("token")
-                const response = await axios.get(`http://localhost:5273/api/Contact/GetContactDetails`, {
+                if(!isTokenValid(token)){
+                      localStorage.removeItem('token')
+                      navigate("/")
+                    }
+                const response = await axios.get(`${RAABTA_API}/api/Contact/GetContactDetails`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -58,13 +68,13 @@ const InteractionDetails = () => {
     }
 
     const goBack = (e) => {
-        navigate(`/contact/${contact.id}`)
+        navigate(`/contact/${contact.contactDetailsID}`)
     }
 
     return (
         <div>
             {isEditing ? 
-                (<AddEditInteraction interaction={interaction} contacts = {allContacts} setIsEditing = {setIsEditing}/>) : (
+                (<AddEditInteraction interaction={interaction} contacts = {allContacts} setIsEditing = {setIsEditing} setInteraction={setInteraction}/>) : (
                     <div>
                     {/* <h2 className="interaction-details-heading">Interaction Details</h2> */}
             <div className='interaction-details'>
