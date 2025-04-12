@@ -12,19 +12,30 @@ const ContactDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
   const location = useLocation();
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if(!isTokenValid(token)){
-          localStorage.removeItem('token')
-          navigate("/")
-        }
-    fetch(`${RAABTA_API}/api/Contact/GetContactDetailsById${id}`, {
-      headers : {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(response => response.json())
-    .then(data => setContact(data))
-  }, [location.pathname, isEditing, contact])
+    const token = localStorage.getItem("token");
+  
+    if (!isTokenValid(token)) {
+      localStorage.removeItem('token');
+      navigate("/");
+      return;
+    }
+  
+    // Fetch contact only if not editing
+    if (!isEditing && id) {
+      fetch(`${RAABTA_API}/api/Contact/GetContactDetailsById${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setContact(data);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch contact:', error);
+        });
+    }
+  }, [id, isEditing]);
 
   const navigate = useNavigate();
   // const contact = contacts.find(contact => contact.id === id);
