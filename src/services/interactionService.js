@@ -3,7 +3,7 @@ import apiService from './apiService';
 const interactionService = {
   // Get all interactions
   getAllInteractions: () => {
-    return apiService.get('/api/Interatction/GetInteratctionDetailsList');
+    return apiService.get('/api/Interatction/GetInteratctionDetails');
   },
 
   // Get interactions by contact ID
