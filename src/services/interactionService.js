@@ -9,7 +9,7 @@ const interactionService = {
   // Get interactions by contact ID
   getInteractionsByContactId: (contactId) => {
     return apiService.get(
-      `/api/Interatction/GetInteratctionDetailsByContactId?contactId=${contactId}`,
+      `/api/Interatction/GetInteratctionDetailsByContactId?id=${contactId}`,
     );
   },
 

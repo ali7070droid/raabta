@@ -32,7 +32,7 @@ const InteractionForm = ({ interaction, contacts, setIsEditing, setInteraction }
   };
 
   const [name, setName] = useState(() => nameValue());
-  const options = useState(() => optionsValue())[0];
+  const options = optionsValue();
 
   const navigate = useNavigate();
 
@@ -100,11 +100,17 @@ const InteractionForm = ({ interaction, contacts, setIsEditing, setInteraction }
   };
 
   const handleChangeTypeAhead = (selected) => {
-    if (selected.length > 0 && contactsFromState && contactsFromState.length > 0) {
-      const newContact = contactsFromState.find((c) => c.name === selected[0]);
-      if (newContact) {
-        setContactForId(newContact);
-        setName(selected[0]);
+    if (selected.length > 0) {
+      const allContacts =
+        contacts && contacts.length > 0
+          ? contacts
+          : contactsFromState;
+      if (allContacts && allContacts.length > 0) {
+        const newContact = allContacts.find((c) => c.name === selected[0]);
+        if (newContact) {
+          setContactForId(newContact);
+          setName(selected[0]);
+        }
       }
     }
   };

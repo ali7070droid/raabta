@@ -5,7 +5,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { apiService, notificationService, validationService } from '../../services';
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
@@ -20,13 +20,13 @@ const AuthPage = () => {
     localStorage.removeItem('token');
   }, []);
 
-  const toggleAuthPage = () => {
-    setIsLogin(!isLogin);
-    setErrors({});
-    setEmail('');
-    setPassword('');
-    setUserName('');
-  };
+  // const toggleAuthPage = () => {
+  //   setIsLogin(!isLogin);
+  //   setErrors({});
+  //   setEmail('');
+  //   setPassword('');
+  //   setUserName('');
+  // };
 
   const validateLoginForm = () => {
     const formErrors = {};
@@ -153,7 +153,8 @@ const AuthPage = () => {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-          {isLogin ? 'Sign in to your account' : 'Create your account'}
+          {'Sign in to your account'}
+          {/* {isLogin ? 'Sign in to your account' : 'Create your account'} */}
         </h2>
         <div className="mt-3 text-center">
           <span className="text-blue-600 dark:text-blue-400 text-xl font-bold">Raabta</span>
@@ -162,7 +163,7 @@ const AuthPage = () => {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <Card className="py-8 px-4 sm:px-10">
-          <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+          {/* <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
             <button
               onClick={() => setIsLogin(true)}
               className={`pb-2 flex-1 text-center font-medium cursor-pointer ${
@@ -183,7 +184,7 @@ const AuthPage = () => {
             >
               Register
             </button>
-          </div>
+          </div> */}
 
           {errors.form && (
             <div className="mb-4 p-2 rounded bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-sm">
@@ -191,42 +192,43 @@ const AuthPage = () => {
             </div>
           )}
 
-          {isLogin ? (
-            <form onSubmit={handleLogin} className="space-y-6">
-              <Input
-                id="email"
-                label="Email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                required
-                error={errors.email}
-              />
-              <Input
-                id="password"
-                label="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                required
-                error={errors.password}
-              />
-              <div>
-                <Button type="submit" className="w-full" variant="primary" disabled={loading}>
-                  {loading ? (
-                    <div className="flex items-center justify-center">
-                      <Loader size="sm" color="white" />
-                      <span className="ml-2">Signing in...</span>
-                    </div>
-                  ) : (
-                    'Sign in'
-                  )}
-                </Button>
-              </div>
-            </form>
-          ) : (
+          <form onSubmit={handleLogin} className="space-y-6">
+            <Input
+              id="email"
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+              error={errors.email}
+            />
+            <Input
+              id="password"
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+              error={errors.password}
+            />
+            <div>
+              <Button type="submit" className="w-full" variant="primary" disabled={loading}>
+                {loading ? (
+                  <div className="flex items-center justify-center">
+                    <Loader size="sm" color="white" />
+                    <span className="ml-2">Signing in...</span>
+                  </div>
+                ) : (
+                  'Sign in'
+                )}
+              </Button>
+            </div>
+          </form>
+
+          {/* Register form — commented out, login only
+          {!isLogin && (
             <form onSubmit={handleRegister} className="space-y-6">
               <Input
                 id="username"
@@ -281,6 +283,7 @@ const AuthPage = () => {
               </div>
             </form>
           )}
+          */}
         </Card>
       </div>
     </div>
