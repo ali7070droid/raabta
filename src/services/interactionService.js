@@ -3,29 +3,29 @@ import apiService from './apiService';
 const interactionService = {
   // Get all interactions
   getAllInteractions: () => {
-    return apiService.get('/api/Interatction/GetInteratctionDetails');
+    return apiService.get('/api/Interaction/GetInteractionDetails');
   },
 
   // Get interactions by contact ID
   getInteractionsByContactId: (contactId) => {
     return apiService.get(
-      `/api/Interatction/GetInteratctionDetailsByContactId?id=${contactId}`,
+      `/api/Interaction/GetInteractionDetailsByContactId?id=${contactId}`,
     );
   },
 
   // Get interaction by ID
   getInteractionById: (id) => {
-    return apiService.get(`/api/Interatction/GetInteratctionDetailsByID?id=${id}`);
+    return apiService.get(`/api/Interaction/GetInteractionDetailsByID?id=${id}`);
   },
 
   // Create new interaction
   createInteraction: (interactionData) => {
-    return apiService.post('/api/Interatction/PostInteratctionDetails', interactionData);
+    return apiService.post('/api/Interaction/PostInteractionDetails', interactionData);
   },
 
   // Update interaction
   updateInteraction: (id, interactionData) => {
-    return apiService.put(`/api/Interatction/PutInteratctionDetails?id=${id}`, interactionData);
+    return apiService.put(`/api/Interaction/PutInteractionDetails?id=${id}`, interactionData);
   },
 };
 
